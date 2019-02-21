@@ -1,0 +1,1 @@
+setTimeout(function() { console.log('2000ms have passed since this demo started') }, 2000);
