@@ -1,0 +1,4 @@
+Node Notes
+==========
+Use WebStorm as the IDE.
+
