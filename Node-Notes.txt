@@ -2,3 +2,55 @@ Node Notes
 ==========
 Use WebStorm as the IDE.
 
+Functions
+----------
+A normal function structure in JS is:
+	function functionName() {
+		// function body;
+		// optional return;
+	}
+
+
+Immediately executing function
+--------------------------
+Reason to create this is to create a new variable scope. An if, else or while does not create a new variable scope in JS (unlike Java). Hence create an anonymous function to achieve this.
+
+var foo = 123;
+if (true) {
+	(function () { // create a new scope
+		var foo = 456;
+	})();
+}
+console.log(foo); // 123
+
+
+Anonymous Function
+------------------
+A function without a name. In JS you can assign a function to a variable. In this case there is no need to assign a name to this function (since it can be referred to by its var name).
+
+var foo = function () { console.log(foo); }
+foo() // foo
+
+
+First Class Functions
+---------------------
+If a function can be treated the same way as any other variable in the language then it is called a First Class function.
+
+JavaScript has first-class functions
+
+
+Higher-Order functions
+----------------------
+Since JS allows us to assign functions to variables, we can pass functions to other functions. Functions that take functions as arguments are called higher-order functions. A very common example of a higher-order function is setTimeout
+
+setTimeout(function () {
+	console.log('2000ms have passed since this demo started');
+}, 2000);
+
+
+
+
+
+
+
+
