@@ -2,6 +2,25 @@ Node Notes
 ==========
 Use WebStorm as the IDE.
 
+
+Variable Type in JS
+-------------------
+Tip: JAVASCRIPT IS NOT A STATICALLY TYPED LANGUAGE - MEANING YOU CANNOT SPECIFY THE TYPE OF A VARIABLE WHEN DEFINING IT.
+
+https://stackoverflow.com/questions/8407622/set-type-for-function-parameters
+
+While you can't inform JavaScript the language about types, you can inform your IDE about them, so you get much more useful autocompletion. To do that, use type hinting by specifying the type right before the parameter in a /* comment */:
+
+EXAMPLE:
+  insertionQ('selector').every(function(/*HTMLElemennt*/element)) {
+  		.....
+  }
+
+This is a pretty widespread technique, used by ReactJS for instance. Very handy for parameters of callbacks passed to 3rd party libraries.
+
+
+
+
 Functions
 ----------
 A normal function structure in JS is:
@@ -46,6 +65,53 @@ Since JS allows us to assign functions to variables, we can pass functions to ot
 setTimeout(function () {
 	console.log('2000ms have passed since this demo started');
 }, 2000);
+
+
+The V8 JS Engine
+----------------
+All the JS inside Node.js is executed by the V8 JS engine.
+
+
+
+Everything in JS is a reference
+-------------------------------
+Whenever we assign one variable to another, JS copies a reference to the variable.
+
+Passing objects around in function calls is extremely lightweight no matter what the size of
+the object, since we copy only the reference to the object and not every single property of the object.
+To make true copies of data (that break the reference link), you can just create a new object literal as shown below:
+
+var foo = { bas: 123};
+var bar = { bas: foo.bas }; // copy
+
+bar.bas = 456; // change copy
+console.log(foo.bas); // 123, original is unchanged.
+
+
+
+
+- Third party libraries can be used to copy objects.
+
+- Default value in JS is undefined
+
+
+
+Exact Equality
+----------------
+While comparing 2 variables, in order to be certain if they are equal, use ===
+If == is used, JS tries to do type coercion. For example, it converts a string to a number
+so that you can compare it with a number.
+Ex:
+	console.log(5 == '5');  // true
+	console.log(5 === '5'); // false
+
+Tip: Don't compare different types to each other.
+
+
+null denotes an empty object. This is different from undefined, which is used by JS for
+nonexistent and noninitialized values.
+
+
 
 
 
