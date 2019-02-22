@@ -1,5 +1,17 @@
 Prototype
 =========
+
+In a true sense, there is no such thing as a class in JavaScript, the way
+it is in Java
+
+
+MOST CLASSES INNSIDE CORE NODE.JS ARE WRITTEN USING THIS PATTERN.
+
+
+Some Links:
+https://www.phpied.com/3-ways-to-define-a-javascript-class/
+
+
 Every object in JS has an internal link to another object called the "prototype".
 
 Prototypes are shared between all the objects (let's call these instances) created 
@@ -65,6 +77,5 @@ The main difference here vs the Revealing Module Pattern is that functions are s
 between all the instances and don't take up memory for each instance. This is because
 functions are only on .prototype and not on "this". 
 
-MOST CLASSES INNSIDE CORE NODE.JS ARE WRITTEN USING THIS PATTERN.
 
 
