@@ -112,6 +112,14 @@ null denotes an empty object. This is different from undefined, which is used by
 nonexistent and noninitialized values.
 
 
+this keyword
+------------
+This is passed based on the context in which the object is invoked.
+
+If you call a function with the "new" JavaScript operator, it creates a new JavaScript
+object and "this" within the function refers to this newly created object.
+
+
 
 
 

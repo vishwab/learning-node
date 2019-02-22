@@ -29,3 +29,15 @@ function printableMessage() {
 		printMessage: printMessage
 	}
 }
+
+
+Usage:
+var awesome1 = printableMessage();
+awesome1.printMessage(); // hello
+
+var awesome2 = printableMessage();
+awesome2.setMessage('hi');
+awesome1.printMessage(); // hi
+
+Since the printableMessage() returns a new object everytime, awesome1 and awesome2 are different.
+
