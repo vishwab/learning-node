@@ -61,3 +61,10 @@ console.log(instance.someProperty); // some initial value
 instance.someMemberFunction();
 console.log(instance.someProperty); // modified value
 
+The main difference here vs the Revealing Module Pattern is that functions are shared
+between all the instances and don't take up memory for each instance. This is because
+functions are only on .prototype and not on "this". 
+
+MOST CLASSES INNSIDE CORE NODE.JS ARE WRITTEN USING THIS PATTERN.
+
+
