@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b9c9827-760b-4a16-ba2e-31c014dd6e30" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/modulePatternEx.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prototypeEx.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Module Pattern Notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Module Pattern Notes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Node-Notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Node-Notes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Prototype.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Prototype.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -46,11 +43,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulePatternEx.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
+            <state relative-caret-position="244">
+              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/class.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -79,6 +85,7 @@
         <option value="$PROJECT_DIR$/eventLoopExample.js" />
         <option value="$PROJECT_DIR$/prototypeEx.js" />
         <option value="$PROJECT_DIR$/modulePatternEx.js" />
+        <option value="$PROJECT_DIR$/class.js" />
       </list>
     </option>
   </component>
@@ -117,8 +124,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.modulePatternEx.js">
-    <configuration name="closure2.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/closure2.js" working-dir="$PROJECT_DIR$">
+  <component name="RunManager" selected="Node.js.class.js">
+    <configuration name="class.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/class.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <configuration name="closureAndCallback.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/closureAndCallback.js" working-dir="$PROJECT_DIR$">
@@ -135,11 +142,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.class.js" />
         <item itemvalue="Node.js.modulePatternEx.js" />
         <item itemvalue="Node.js.prototypeEx.js" />
         <item itemvalue="Node.js.eventLoopExample.js" />
         <item itemvalue="Node.js.closureAndCallback.js" />
-        <item itemvalue="Node.js.closure2.js" />
       </list>
     </recent_temporary>
   </component>
@@ -153,7 +160,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1550714035145</updated>
-      <workItem from="1550714038742" duration="5367000" />
+      <workItem from="1550714038742" duration="5994000" />
     </task>
     <task id="LOCAL-00001" summary="First Node js code (main.js) via WebStorm">
       <created>1550714367057</created>
@@ -208,7 +215,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5367000" />
+    <option name="totallyTimeSpent" value="5994000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="103" y="10" width="1400" height="820" extended-state="0" />
@@ -330,8 +337,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modulePatternEx.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
+        <state relative-caret-position="244">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/class.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
         </state>
       </provider>
     </entry>

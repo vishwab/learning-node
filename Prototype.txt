@@ -5,7 +5,11 @@ Every object in JS has an internal link to another object called the "prototype"
 Prototypes are shared between all the objects (let's call these instances) created 
 from the same function.
 
-Imagine you need 1,000 instances created. All the functionality you put on prototype is shared. And therefore lesson one: prototype saves memory
+Imagine you need 1,000 instances created. All the functionality you put on prototype is shared. 
+
+Lesson 1
+--------
+prototype saves memory
 
 Prototype is great for reading data off an object. However, if you set a property on the
 object, you break the link with the prototype because the prototype is only accessed
@@ -28,6 +32,32 @@ console.log(bas.bar); //456 i.e., prototype not accessed
 console.log (qux.bar); // 123
 
 
+Lesson 2
+--------
+.prototype is not good for properties you plan on writing to.
 
 
+So the question becomes what we should use for properties we need to write to.
+Recall that "this" refers to the object that is created when the function is called with
+the new operator. So "this" is a perfect candidate for read/write properties and you should use it for all properties. But functions are generally not altered after creation. So functions are great candidates to go on .prototype This way, functionality (functions/methods) is shared between all instances and properties belong on individual objects.
+
+// Class definition
+function someClass() {
+	// Properties go here
+	this.someProperty = 'some intial value';
+}
+
+// Member functions go here:
+someClass.prototype.someMemberFunction = function() {
+	/* Do something using this */
+	this.someProperty = 'modified value';
+}
+
+// Creation
+var instance = new someClass();
+
+// Usage
+console.log(instance.someProperty); // some initial value
+instance.someMemberFunction();
+console.log(instance.someProperty); // modified value
 
