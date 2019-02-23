@@ -1,0 +1,183 @@
+Node Core Modules
+=================
+
+require function
+----------------
+The require function is the main way of importing modules into the current file:
+
+Built-in "path" module import
+var path = require('path')
+
+To import a custom module, such as vishwa.js (which is in the same dir)...
+var vishwa = require('./vishwa')
+
+
+NOTE: The require function blocks further execution until the module has been loaded.
+
+After the first time a call is made to a particular file, the module.exports is cached.
+
+
+
+Shared State
+--------------
+Since modules are cached, every module that requires foo.js will get the same(mutable) object if we return an object foo from a module foo.js
+
+
+Object Factories
+----------------
+Since a call to require returns the same mutable object, if a new object needs to be created, you can export a function from the source module that returns a new object.
+Ex:
+exports.a = function() {
+	console.log('a has been called');
+};
+
+
+Modules Best Practices
+----------------------
+Do not use the .js extension in the require:
+	Reason: For browser-based module systems (such as RequireJS), it is assumed that you do not provide the .js extention since we cannot look at the server filesystem.
+
+Relative paths:
+	When using file-based modules you need to use relative paths (in other words, do require('./foo') instead of require('foo')).
+	Reason: Non-Relative paths are reserved for core modules and node_modules.
+
+Utilize exports:
+	Try and use the exports alias when you want to export more than one thing. As a matter of best practice, use it always (as shown in above example in Object Factories)
+
+Export an entire folder:
+	Instead of having many import blocks denoting multiple files from same folder, create an index.js in that specific folder. Add all the requires (imports) into index.js and then just add a require to this index.js in the file that needs all these imports.
+
+
+Important Globals
+-----------------
+console
+
+timers
+	setTimeout(handler, timeout in seconds)
+	setInterval(handler, timeout in seconds)
+
+_filename
+
+_dirname
+
+process
+
+
+Command Line Arguments
+----------------------
+Since Node.js does not have a main function similar to C/C++/Java, you use the "process" object to access the command line arguments. The arguments are available as the process.argv member property, which is an array. 
+In this array, the first element is node(that is, the node executable), the 2nd element is the name of the JS file passed into Node.js to start the process, and the remaining elements are the command line arguments.
+
+Example: if you run below command on a file called argv.js
+	node argv.js foo bar bas
+
+	"node" is 1st element in the array (at 0th position)
+	argv.js is 2nd element
+	foo is 3rd element
+	bar is 4th element
+	bas is 5th element
+
+process.nextTick
+----------------
+is a simple function that takes a callback function. It is used to put the callback into the next cycle of the Node.js event loop. It is designed to be highly efficient, and it is used by a number of Node.js core libraries.
+
+
+Buffer
+-------
+Your main interaction with Buffer class will most likely be in the form of converting Buffer instances to string or strings to Buffer instances.
+
+Example:
+var str = "Hello Buffer World!";
+
+// From string to buffer
+var buffer = new Buffer(str, 'utf-8');
+
+// From buffer to string
+var roundTrip = buffer.toString('utf-8');
+console.log(roundTrip); // Hello
+
+
+global
+-------
+Don't use global to store state or other info.
+
+
+
+Core Modules
+------------
+Consuming these will be via require, but it won't need a relative path.
+
+example:
+	var path = require('path');
+
+
+Path Module
+-----------
+path.normalize(str)
+
+path.join([str1], [str2], ...)
+
+dirname, basename, and extname
+
+
+fs module
+---------
+provides access to the filesystem. Use require('fs') to load this module.
+
+it has functions for renaming files, deleting files, reading files and writing to files.
+
+Write and Read
+	var fs = require('fs')
+
+	// write
+	fs.writeFileSync('test.txt', 'Hello fa!');
+
+	// read
+	console.log(fs.readFileSync('test.txt').toString());
+
+
+Delete a file 
+	use unlink or unlinkSync (asynchronous OR synchronous):
+		fs.unlinkSync(<file-name)
+			OR
+		fs.unlink(<file-name)
+
+
+	The async version takes a callback function and is passed the error object if there is one.
+
+	Note: 	use unlinkSync in a try-catch block
+			use unlink and check for error
+
+	Sync example
+		var fs = require('fs')
+		try {
+			fs.unlinkSync('./test.txt');
+			console.log('test.txt successfully deleted')
+		} catch (err) {
+			console.log('Error: ' , err)
+		}
+
+	Async example
+		var fs = require('fs')
+		fs.unlink('./test.txt', function (err){
+			if (err) {
+				console.log('Error: ', err);
+			} else {
+				console.log('text.txt successfully deleted')
+			}
+		});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

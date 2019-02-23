@@ -1,0 +1,187 @@
+Twitter Bot
+===========
+
+Build a simple Twitter Bot with Node.js in just 38 lines of code
+
+https://codeburst.io/build-a-simple-twitter-bot-with-node-js-in-just-38-lines-of-code-ed92db9eb078
+
+Before we get started, all of the code for this tutorial can be found in my GitHub Repository (https://github.com/bmorelli25/Twitter-Favorite-Bot)
+
+
+Ready? Let’s do it. Here’s what we’re going to need:
+
+Twitter API: If you have a Twitter account, you can utilize the Twitter API. You can read the API Documentation here (https://dev.twitter.com/docs).
+
+
+Node.js: Visit the official Node.js website to download and install Node if you haven’t already. Looking for a more in-depth tutorial? Check out my Top Three Node.js courses.
+	(https://codeburst.io/three-awesome-courses-for-learning-node-js-d7f761437101)
+
+Twitter NPM: An NPM module that allows to easily interact with the Twitter API.
+	(https://www.npmjs.com/package/twitter)
+
+
+Create an Application
+First thing’s first: The only reason this bot will work is because of the Twitter API. On the most basic of levels an API is simply a way for one program to interact with another. We’ll be creating a Node.js application that interacts with the Twitter API. In this application, the API will allow us to search for tweets, and favorite the tweets that our application finds.
+
+To use the Twitter API, we need some information! Head on over to the Twitter API(https://apps.twitter.com/app/new) and create a new application.
+
+
+You’ll have to fill out some information, then look for the following information under the Keys and Access Tokens tab. You may have to click Generate Access Token to create your access token.
+
+Consumer Key
+Consumer Secret
+Access Token Key
+Access Token Secret
+
+
+Once you see these four pieces of information, you’re ready to move on to the next section.
+
+Configuration
+Now that we have the application information we need, lets set up our bot.
+
+1. Create an empty directory named twitter-bot and run:
+npm init
+
+
+2. Fill out the required information to initialize our project.
+
+Here’s what my package.json file looked like after initializing my project. Note: Yours may look slightly different, that’s OK.
+
+{
+  "name": "twitter-bot",
+  "version": "1.0.0",
+  "description": "Nodejs Twitter Bot",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmorelli25/Twitter-Bot.git"
+  },
+  "author": "Brandon Morelli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bmorelli25/Twitter-Bot/issues"
+  },
+  "homepage": "https://github.com/bmorelli25/Twitter-Bot#readme"
+}
+
+
+3. Next, we’ll save our one needed dependency by running:
+
+npm install --save twitter
+
+
+4. Create two files, config.js and app.js
+
+Our config.js file will store the configuration information. The app.js file will contain our twitter bot code.
+
+5. Let’s add the twitter application information from above to our config.js file. Replace each of the blanks below with your corresponding app data that you got from Twitter.
+
+// config.js
+module.exports = {
+  consumer_key: '',
+  consumer_secret: '',
+  access_token_key: '',
+  access_token_secret: ''
+}
+6. We can now require our two dependencies in our app.js file:
+
+// app.js
+var Twitter = require('twitter');
+var config = require('./config.js');
+7. Now that we have all the puzzle pieces, it’s time to bring everything together. We do this by passing our configuration details into Twitter. Add the following code to app.js
+
+var T = new Twitter(config);
+At this point we have our configuration all set up. Our application details (which are necessary to interact with the Twitter API) are being passed into the npm module Twitter. This npm module simplifies the process of interacting with Twitter’s API. Now we can make get and post requests to the API which is what allows us to ‘do things’ on Twitter via our bot!
+
+Build the Bot
+Remember, we’re starting very simple with this tutorial. Let’s visualize the flow of favoriting a tweet: There are two parts. First, you search for Tweets, then you select one and favorite it. Lets work on the search functionality first:
+
+We’re going to set up a params variable which will house our search parameters. There are a lot of parameters we can use. You can see the full list on Twitter’s API documentation here.
+
+var Twitter = require('twitter');
+var config = require('./config.js');
+var T = new Twitter(config);
+// Set up your search parameters
+var params = {
+  q: '#nodejs',
+  count: 10,
+  result_type: 'recent',
+  lang: 'en'
+}
+q is the only required parameter and it stores our search query. In my example we’re searching for tweets containing #nodejs. Feel free to change this to whatever query you’d like.
+
+I also use three optional search parameters:
+
+count — specify the number of tweets you’d like to return
+
+result_type: 'recent' — returns only the most recent results
+
+lang: 'en' — returns only English results
+
+Now that we have our search parameters we plug them into a get request so we can find some tweets!
+
+T.get('search/tweets', params, function(err, data, response) {
+  if(!err){
+    // This is where the magic will happen
+  } else {
+    console.log(err);
+  }
+})
+To gain a deep understanding of what is happening here, you’ll need to read the Twitter API Documentation on GET search/tweets, but I’ll try and provide a basic introduction:
+
+With the help of the npm Twitter module, we are able to make a get request to ‘search/tweets’ and pass in our search params we set previously. This get request returns a callback. If there is no error in this callback, we will run our code to favorite a tweet. If there is an error, we will log the error and be done.
+
+Awesome, so now we just need some code to add into our if(!err) statement above!
+
+Our get request is returning an array of multiple tweets via the data.statuses object. So we need to loop through all of the tweets in that array and favorite each one individually. Here’s how we do that:
+
+// Loop through the returned tweets
+    for(let i = 0; i < data.statuses.length; i++){
+      // Get the tweet Id from the returned data
+      let id = { id: data.statuses[i].id_str }
+      // Try to Favorite the selected Tweet
+      T.post('favorites/create', id, function(err, response){
+        // If the favorite fails, log the error message
+        if(err){
+          console.log(err[0].message);
+        }
+        // If the favorite is successful, log the url of the tweet
+        else{
+          let username = response.user.screen_name;
+          let tweetId = response.id_str;
+          console.log('Favorited: ', `https://twitter.com/${username}/status/${tweetId}`)
+        }
+      });
+    }
+We create a for loop and loop each and every tweet (until we’ve reached the length of data.statuses).
+Inside our for loop we capture the tweet id using data.statuses[i].id_str . We need this id for our post request.
+We run a post request to favorites/create. This is the API route that is used to favorite a tweet. We pass in our tweet id, and the request returns a callback.
+In our callback we look for an error. If there is an error, we log out the error message. Most of the time the error message will occur because we are trying to favorite a tweet that we have already favorited.
+If there is no error, the bot will favorite the tweet! As an added bonus, I use the returned object to construct the url of the newly favorited tweet. This url is then logged to the console making it easy to see which tweets the bot has favorited.
+Run your bot!
+It’s done! Run your bot in the command line with node app.js
+
+That’s it! Watch in glory as your bot favorites and logs each tweet url out!
+
+
+
+Full Code
+Here’s what the full app.js file looks like. I also have all the code on my GitHub(https://github.com/bmorelli25/Twitter-Favorite-Bot), so head over there if you want a way to easily download and play with the bot!
+
+
+Coming Soon
+Here’s a list of possible enhancements and additions we can make to our twitter bot. What do you want to learn? Tweet me @BrandonMorelli to let me know and I’ll cover it in Part 2 of this series! Also, I publish a few articles and tutorials each week, please consider entering your email here if you’d like to be added to my once-weekly email list.
+
+Add retweet functionality
+Reply to tweets on a certain subject/hashtag
+Reply to users if they follow you
+Follow Bot
+Run the bot on a server (instead of locally)
+
+
+
+
+
