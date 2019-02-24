@@ -168,6 +168,28 @@ Delete a file
 		});
 
 
+OS Module
+---------
+provides a few basic (but vital) OS related utility functions and properties. Access it using require('os') call. 
+
+Some examples:
+	os.totalmem(), os.freemem(), os.cpus().length
+
+
+
+util module
+-----------
+contains a # of general-purpose functions.
+
+to log something with a timestamp: util.log('sample msg'); // 27 Apr 18:00:35 - sample msg
+
+util.format(...) provides string formatting:
+	// name and money are local variables with appropriate values.
+	console.log(util.format('%s has %d dollars', name, money));
+
+
+Other Util functions:
+	util.isArray(...), util.isDAte(...), util.isError(...)
 
 
 
